@@ -67,8 +67,6 @@ class UserHandler {
 
         $admin = $sql->fetchAll(\PDO::FETCH_ASSOC);
 
-        print_r($admin);
-
         return $admin ? true : false;
     }
 }
