@@ -222,6 +222,7 @@ class AirportHandler {
         }
 
     }
+
     public function getLastsOrderLimousine() {
         $pdo = Database::getInstance();
         $sql = $pdo->query("SELECT * FROM `limousine` ORDER BY id DESC LIMIT 2");
@@ -244,6 +245,7 @@ class AirportHandler {
         }
 
     }
+    
     public function getLastsOrderTaxi() {
         $pdo = Database::getInstance();
         $sql = $pdo->query("SELECT * FROM `taxi` ORDER BY id DESC LIMIT 2");

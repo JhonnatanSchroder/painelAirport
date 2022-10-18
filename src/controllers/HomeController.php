@@ -71,8 +71,24 @@ class HomeController extends Controller {
         }
 
         if($atts['service'] === 'taxi'){
-
+           $street_start =  filter_input(INPUT_POST, 'street_start');
+           $cep_start =  filter_input(INPUT_POST, 'cep_start');
+           $city_start =  filter_input(INPUT_POST, 'city_start');
+           $street_end =  filter_input(INPUT_POST, 'street_end');
+           $cep_end =  filter_input(INPUT_POST, 'cep_end');
+           $city_end =  filter_input(INPUT_POST, 'city_end');
+           $date =  filter_input(INPUT_POST, 'date');
+           $passengers =  filter_input(INPUT_POST, 'passengers');
+           $kids_seats =  filter_input(INPUT_POST, 'kids_seats');
+           $bosster_seats =  filter_input(INPUT_POST, 'booster_seats');
+           $obs =  filter_input(INPUT_POST, 'obs');
+           $conection =  filter_input(INPUT_POST, 'conection');
+           $name =  filter_input(INPUT_POST, 'name');
+           $email =  filter_input(INPUT_POST, 'email');
+           $phone =  filter_input(INPUT_POST, 'phone');
+           $service_type =  filter_input(INPUT_POST, 'service_type');
         }
+
         if($atts['service'] === 'bus'){
             $date = filter_input(INPUT_POST, 'date');
             $street = filter_input(INPUT_POST, 'street');
@@ -84,6 +100,7 @@ class HomeController extends Controller {
             $email = filter_input(INPUT_POST, 'email');
             $phone = filter_input(INPUT_POST, 'phone');
         }
+        
         if($atts['service'] === 'limousine'){
             $date = filter_input(INPUT_POST, 'date');
             $street = filter_input(INPUT_POST, 'street');

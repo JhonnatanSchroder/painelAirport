@@ -53,9 +53,6 @@ class UserHandler {
         $sql->bindValue(':password', $hash);
         $sql->bindValue(':token', $token);
         $sql->execute();
-
-        echo 'entrei no add';
-
         return $token;
     }
 
