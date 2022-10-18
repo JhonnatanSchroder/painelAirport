@@ -15,7 +15,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           server: files.000webhost.com
-          username: devsmeta
-          password: ${{ secrets.ftp_password }}
+          username: airporttaxich
+          password: jhongusta012
           server-dir: public_html/painelAirporttaxi/
           exclude: ../src/Config.php
