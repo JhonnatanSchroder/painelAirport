@@ -19,7 +19,7 @@
     <!-- Nucleo Icons -->
     <link href="<?=$base?>/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="<?=$base?>/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome  -->
     <script
       src="https://kit.fontawesome.com/e51c76ee7f.js"
       crossorigin="anonymous"
