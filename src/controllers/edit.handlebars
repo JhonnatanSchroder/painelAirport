@@ -1,0 +1,664 @@
+<section class="section">
+  <div class="container p-5 has-background-white">
+    <div class="columns">
+      <div class="column is-12-desktop">
+        <h1
+          class="titulo mb-4 is-size-5-mobile is-size-4-tablet is-size-2-desktop has-text-weight-bold has-text-centered"
+        >TÁXI DE / PARA AEROPORTO</h1>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-11-mobile is-7-tablet">
+        <h2
+          class="is-size-5-mobile is-size-4-tablet is-size-3-desktop has-text-weight-semibold titulo"
+        >Atualizar pedido</h2>
+        <p class="mb-5 is-size-4-desktop is-size-5-tablet">Preencha abaixo as
+          informaões de que deseja edita/atualizar e confirme para atualizar!</p>
+      </div>
+    </div>
+    <!-- Formulario -->
+    <div class="columns is-centered">
+      <div class="column is-6">
+        {{#if bus}}
+          <form action="/order/edit" method="POST" id="cepForm" class="cepForm">
+            <div class="field">
+              <label class="label">Data de Partida</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.start}}"
+                  name="start"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Nome da Rua</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.street}}"
+                  name="street"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">CEP/CIDADE</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.cep}}"
+                  name="cep"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Passageiros</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.passageiros}}"
+                  name="passageiros"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Observação</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.obs}}"
+                  name="obs"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Como foi planejada a viagem</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.how}}"
+                  name="how"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Primeiro e Ultimo Nome</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.name}}"
+                  name="name"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.email}}"
+                  name="email"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">telefone</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{bus.telefone}}"
+                  name="telefone"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button
+                  class="button is-link"
+                  id="continuar"
+                  type="submit"
+                >Atualizar</button>
+              </div>
+            </div>
+          </form>
+          <br />
+          <form action="/order/remove" method="POST">
+            <input type="hidden" name="id" value="{{bus._id}}" />
+            <input type="hidden" name="service" value="{{bus.service}}" />
+            <input
+              class="button is-danger"
+              id="continuar"
+              value="Excluir"
+              type="submit"
+            />
+          </form>
+        {{/if}}
+
+        {{#if limousine}}
+          <form action="/order/edit" method="POST" id="cepForm" class="cepForm">
+            <div class="field">
+              <label class="label">Data de Partida</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.start}}"
+                  name="start"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Nome da Rua</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.street}}"
+                  name="street"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">CEP/CIDADE</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.cep}}"
+                  name="cep"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Passageiros</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.passageiros}}"
+                  name="passageiros"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Observação</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.obs}}"
+                  name="obs"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Como foi planejada a viagem</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.how}}"
+                  name="how"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Primeiro e Ultimo Nome</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.name}}"
+                  name="name"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.email}}"
+                  name="email"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">telefone</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{limousine.telefone}}"
+                  name="telefone"
+                  id="cep"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button
+                  class="button is-link"
+                  id="continuar"
+                  type="submit"
+                >Atualizar</button>
+              </div>
+            </div>
+          </form>
+          <br />
+          <form action="/order/remove" method="POST">
+            <input type="hidden" name="id" value="{{limousine._id}}" />
+            <input type="hidden" name="service" value="{{limousine.service}}" />
+            <input
+              class="button is-danger"
+              id="continuar"
+              value="Excluir"
+              type="submit"
+            />
+          </form>
+        {{/if}}
+
+        {{#if pedidos}}
+          <form action="/order/edit" method="POST" id="cepForm" class="cepForm">
+            <div class="field">
+              <label class="label">CEP/CIDADE</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{pedidos.cep_start}}"
+                  name="cepPartida"
+                  id="cep"
+                />
+                <input type="hidden" name="id" value="{{pedidos._id}}" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Partida para o aeroporto</label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type="text"
+                  value="{{pedidos.dataP}}"
+                  onclick="(this.type='date')"
+                  name="partida"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">passageiros </label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type=""
+                  name="passageiros"
+                  value="{{pedidos.passageiros}}"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Cadeiras de criança </label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type=""
+                  name="criancas"
+                  value="{{pedidos.kids_chair}}"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Assento elevatório </label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type=""
+                  name="assento"
+                  value="{{pedidos.assento_elev}}"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Observação</label>
+              <div class="control">
+                <div class="">
+                  <textarea
+                    class="textarea is-link"
+                    value="{{pedidos.obs}}"
+                    placeholder="escreva a sua observação"
+                    name="obs"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+
+              <label class="label">Tipo de Conexão:</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{pedidos.conection}}"
+                  name="cepPartida"
+                  id="cep"
+                />
+                <input type="hidden" name="id" value="{{pedidos._id}}" />
+              </div>
+            </div>
+            <div class="field">
+
+              <label class="label">Aeroporto de Partida</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{pedidos.airport}}"
+                  name="cepPartida"
+                  id="cep"
+                />
+                <input type="hidden" name="id" value="{{pedidos._id}}" />
+              </div>
+            </div>
+            <br />
+            <div class="field">
+              <label class="label">primeiro e ultimo nome</label>
+              <div class="control">
+                <input
+                  value="{{pedidos.nome}}"
+                  class="input is-link"
+                  type="text"
+                  name="nome"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input
+                  value="{{pedidos.email}}"
+                  class="input is-link"
+                  type="email"
+                  name="email"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">telefone</label>
+              <div class="control">
+                <input
+                  value="{{pedidos.telefone}}"
+                  class="input is-link"
+                  type="text"
+                  name="telefone"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Nome da Rua</label>
+              <div class="control has-icons-left has-icons-right">
+                <input
+                  value="{{pedidos.nome_rua}}"
+                  class="input is-link"
+                  type="text"
+                  placeholder="insira o nome da rua"
+                  value=""
+                  name="rua"
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">CEP/CIDADE que iremos te levar</label>
+              <div class="control">
+                <input
+                  value="{{pedidos.cep_end}}"
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value=""
+                  name="cepFinal"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button
+                  class="button is-link"
+                  id="continuar"
+                  type="submit"
+                >Atualizar</button>
+              </div>
+              <p class="help is-danger small"></p>
+            </div>
+          </form>
+          <form action="/order/remove" method="POST">
+            <input type="hidden" name="id" value="{{pedidos._id}}" />
+            <input type="hidden" name="service" value="{{pedidos.service}}" />
+            <input
+              class="button is-danger"
+              id="continuar"
+              value="Excluir"
+              type="submit"
+            />
+          </form>
+        {{/if}}
+
+        {{#if taxi}}
+          <form action="/order/edit" method="POST" id="cepForm" class="cepForm">
+            <div class="field">
+              <label class="label">CEP/CIDADE</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{taxi.cep_start}}"
+                  name="cepPartida"
+                  id="cep"
+                />
+                <input type="hidden" name="id" value="{{taxi._id}}" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">passageiros </label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type=""
+                  name="passageiros"
+                  value="{{taxi.passageiros}}"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Cadeiras de criança </label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type=""
+                  name="criancas"
+                  value="{{taxi.kids_chair}}"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Assento elevatório </label>
+              <div class="control">
+                <input
+                  class="input is-link"
+                  type=""
+                  name="assento"
+                  value="{{taxi.assento_elev}}"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Observação</label>
+              <div class="control">
+                <div class="">
+                  <textarea
+                    class="textarea is-link"
+                    value="{{taxi.obs}}"
+                    placeholder="escreva a sua observação"
+                    name="obs"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+
+              <label class="label">Tipo de Conexão:</label>
+              <div class="control is-danger">
+                <input
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value="{{taxi.conection}}"
+                  name="cepPartida"
+                  id="cep"
+                />
+                <input type="hidden" name="id" value="{{taxi._id}}" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">primeiro e ultimo nome</label>
+              <div class="control">
+                <input
+                  value="{{taxi.nome}}"
+                  class="input is-link"
+                  type="text"
+                  name="nome"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input
+                  value="{{taxi.email}}"
+                  class="input is-link"
+                  type="email"
+                  name="email"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">telefone</label>
+              <div class="control">
+                <input
+                  value="{{taxi.telefone}}"
+                  class="input is-link"
+                  type="text"
+                  name="telefone"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Nome da Rua</label>
+              <div class="control has-icons-left has-icons-right">
+                <input
+                  value="{{taxi.nome_rua}}"
+                  class="input is-link"
+                  type="text"
+                  placeholder="insira o nome da rua"
+                  value=""
+                  name="rua"
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">CEP/CIDADE que iremos te levar</label>
+              <div class="control">
+                <input
+                  value="{{taxi.cep_end}}"
+                  class="input is-link"
+                  type="text"
+                  placeholder="CEP"
+                  value=""
+                  name="cepFinal"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button
+                  class="button is-link"
+                  id="continuar"
+                  type="submit"
+                >Atualizar</button>
+              </div>
+              <p class="help is-danger small"></p>
+            </div>
+          </form>
+          <form action="/order/remove" method="POST">
+            <input type="hidden" name="id" value="{{taxi._id}}" />
+            <input type="hidden" name="service" value="{{taxi.service}}" />
+            <input
+              class="button is-danger"
+              id="continuar"
+              value="Excluir"
+              type="submit"
+            />
+          </form>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
