@@ -346,6 +346,12 @@
               />
             </div>
           </div>
+          <div class="mt-2 mb-5 d-flex">
+            <h6 class="mb-0">Logout</h6>
+            <div class="form-check form-switch ps-0 ms-auto my-auto">
+              <a href='<?=$base?>/logout' class='btn btn-info'>Logout</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -122,6 +122,11 @@ class HomeController extends Controller {
         $this->redirect('/orders');
     }
 
+    public function logout() {
+        $_SESSION['token'] = '';
+        $this->redirect('/login');
+    }
+
 
 
 }

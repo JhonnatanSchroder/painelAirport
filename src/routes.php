@@ -17,3 +17,5 @@ $router->post('/edit', "HomeController@editAction");
 $router->get('/excluir/{id}/{service}', "HomeController@excluir");
 
 $router->get('/orders', "HomeController@orders");
+
+$router->get('/logout', "HomeController@logout");
