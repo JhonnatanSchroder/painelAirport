@@ -12,7 +12,7 @@ $router->get('/signup', "LoginController@signup");
 $router->post('/signup', "LoginController@signupAction");
 
 $router->get('/edit/{id}/{service}', "HomeController@edit");
-$router->post('/edit', "HomeController@editAction");
+$router->post('/edit/{id}/{service}', "HomeController@editAction");
 
 $router->get('/excluir/{id}/{service}', "HomeController@excluir");
 

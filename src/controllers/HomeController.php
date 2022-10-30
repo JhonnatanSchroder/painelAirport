@@ -3,8 +3,13 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\helpers\UserHandler;
-use \src\helpers\AirportHandler;
+use \src\helpers\HomeHandler;
 use \src\helpers\OrdersHandler;
+use \src\models\AirportOrders;
+use \src\models\TaxiOrders;
+use \src\models\Bus;
+use \src\models\Limousine;
+
 
 class HomeController extends Controller {
     private $loggedUser;
@@ -18,10 +23,10 @@ class HomeController extends Controller {
 
 
     public function index() {
-        $lastOrderAirport = AirportHandler::getLastsOrderAirport();
-        $lastOrderBus = AirportHandler::getLastsOrderBus();
-        $lastOrderLimousine = AirportHandler::getLastsOrderLimousine();
-        $lastOrderTaxi = AirportHandler::getLastsOrderTaxi();
+        $lastOrderAirport = HomeHandler::getLastsOrderAirport();
+        $lastOrderBus = HomeHandler::getLastsOrderBus();
+        $lastOrderLimousine = HomeHandler::getLastsOrderLimousine();
+        $lastOrderTaxi = HomeHandler::getLastsOrderTaxi();
 
         $this->render('home', [
             'ordersAirport' => $lastOrderAirport,
@@ -46,7 +51,7 @@ class HomeController extends Controller {
     }
 
     public function edit($atts) {
-        $pedido = AirportHandler::getOrder($atts['id'], $atts['service']);
+        $pedido = HomeHandler::getOrder($atts['id'], $atts['service']);
 
         $this->render('edit', [
             'order' => $pedido
@@ -54,66 +59,77 @@ class HomeController extends Controller {
     }
 
     public function editAction($atts) {
-        if($atts['service'] === 'airportTaxi'){
-            $cep_start = filter_input(INPUT_POST, 'cep_start');
-            $date = filter_input(INPUT_POST, 'date');
-            $passenger = filter_input(INPUT_POST, 'passenger');
-            $kids_seats = filter_input(INPUT_POST, 'kids_seats');
-            $booster_seats = filter_input(INPUT_POST, 'booster_seats');
-            $obs = filter_input(INPUT_POST, 'obs');
-            $name = filter_input(INPUT_POST, 'name');
-            $email = filter_input(INPUT_POST, 'email');
-            $phone = filter_input(INPUT_POST, 'phone');
-            $street = filter_input(INPUT_POST, 'street');
-            $cep_end = filter_input(INPUT_POST, 'cep_end');
-            $conection = filter_input(INPUT_POST, 'conection');
-            $airport = filter_input(INPUT_POST, 'airport');
+        if($atts['service'] === 'airporttaxi'){
+            AirportOrders::update()->set([
+                'cep_start' => $_POST['cep_start'],
+                'date_start' => $_POST['date'],
+                'passengers' => $_POST['passengers'],
+                'kids_seats' => $_POST['kids_seats'],
+                'booster_seats' => $_POST['booster_seats'],
+                'obs' => $_POST['obs'],
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'],
+                'street_name' => $_POST['street'],
+                'cep_end' => $_POST['cep_end'],
+                'conection' => $_POST['conection'],
+                'airport' => $_POST['airport'],
+            ])->where('id', $atts['id'])->execute();
         }
 
         if($atts['service'] === 'taxi'){
-           $street_start =  filter_input(INPUT_POST, 'street_start');
-           $cep_start =  filter_input(INPUT_POST, 'cep_start');
-           $city_start =  filter_input(INPUT_POST, 'city_start');
-           $street_end =  filter_input(INPUT_POST, 'street_end');
-           $cep_end =  filter_input(INPUT_POST, 'cep_end');
-           $city_end =  filter_input(INPUT_POST, 'city_end');
-           $date =  filter_input(INPUT_POST, 'date');
-           $passengers =  filter_input(INPUT_POST, 'passengers');
-           $kids_seats =  filter_input(INPUT_POST, 'kids_seats');
-           $bosster_seats =  filter_input(INPUT_POST, 'booster_seats');
-           $obs =  filter_input(INPUT_POST, 'obs');
-           $conection =  filter_input(INPUT_POST, 'conection');
-           $name =  filter_input(INPUT_POST, 'name');
-           $email =  filter_input(INPUT_POST, 'email');
-           $phone =  filter_input(INPUT_POST, 'phone');
-           $service_type =  filter_input(INPUT_POST, 'service_type');
+            TaxiOrders::update()->set([
+               'street_start' =>  $_POST['street_start'],
+               'cep_start' =>  $_POST['cep_start'],
+               'city_start' =>  $_POST['city_start'],
+               'street_end' =>  $_POST['street_end'],
+               'cep_end' =>  $_POST['cep_end'],
+               'city_end' =>  $_POST['city_end'],
+               'date_start' =>  $_POST['date'],
+               'passengers' =>  $_POST['passengers'],
+               'kids_seats' =>  $_POST['kids_seats'],
+               'booster_seats' =>  $_POST['booster_seats'],
+               'obs' =>  $_POST['obs'],
+               'conection' =>  $_POST['conection'],
+               'name' =>  $_POST['name'],
+               'email' =>  $_POST['email'],
+               'phone' =>  $_POST['phone'],
+            ])->where('id', $atts['id'])->execute();
+
         }
 
         if($atts['service'] === 'bus'){
-            $date = filter_input(INPUT_POST, 'date');
-            $street = filter_input(INPUT_POST, 'street');
-            $cep_start = filter_input(INPUT_POST, 'cep_start');
-            $passenger = filter_input(INPUT_POST, 'passenger');
-            $obs = filter_input(INPUT_POST, 'obs');
-            $how = filter_input(INPUT_POST, 'how');
-            $name = filter_input(INPUT_POST, 'name');
-            $email = filter_input(INPUT_POST, 'email');
-            $phone = filter_input(INPUT_POST, 'phone');
+            Bus::update()->set([
+                'date' => $_POST['date'],
+                'street' => $_POST['street'],
+                'cep_start' => $_POST['cep_start'],
+                'passengers' => $_POST['passengers'],
+                'obs' => $_POST['obs'],
+                'how' => $_POST['how'],
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'],
+            ])->where('id', $atts['id'])->execute();
+
         }
         
         if($atts['service'] === 'limousine'){
-            $date = filter_input(INPUT_POST, 'date');
-            $street = filter_input(INPUT_POST, 'street');
-            $cep_start = filter_input(INPUT_POST, 'cep_start');
-            $passenger = filter_input(INPUT_POST, 'passenger');
-            $kids_seats = filter_input(INPUT_POST, 'kids_seats');
-            $booster_seats = filter_input(INPUT_POST, 'booster_seats');
-            $obs = filter_input(INPUT_POST, 'obs');
-            $how = filter_input(INPUT_POST, 'how');
-            $name = filter_input(INPUT_POST, 'name');
-            $email = filter_input(INPUT_POST, 'email');
-            $phone = filter_input(INPUT_POST, 'phone');
+            Limousine::update()->set([
+                'date' => $_POST['date'],
+                'street' => $_POST['street'],
+                'cep_start' => $_POST['cep_start'],
+                'passengers' => $_POST['passengers'],
+                'kids_seats' => $_POST['kids_seats'],
+                'booster_seats' => $_POST['booster_seats'],
+                'obs' => $_POST['obs'],
+                'how' => $_POST['how'],
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'],
+            ])->where('id', $atts['id'])->execute();
         }
+
+        $this->redirect('/orders');
     }
 
     public function excluir($atts) {

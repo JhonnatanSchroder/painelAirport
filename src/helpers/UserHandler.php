@@ -2,7 +2,6 @@
 namespace src\helpers;
 
 use \src\models\Admin;
-use \core\Database;
 
 
 class UserHandler {
@@ -25,15 +24,10 @@ class UserHandler {
     }
 
     public static function verifyLogin($email, $password) {
-        $pdo = Database::getInstance();
-        $sql = $pdo->prepare("SELECT * FROM `admin` WHERE email = :email");
-        $sql->bindValue(':email', $email);
-        $sql->execute();
+        $user = Admin::select()->where('email', $email)->one();
         
-        $user = $sql->fetchAll(\PDO::FETCH_ASSOC);
-
         if($user) {
-            if(password_verify($password, $user[0]['password'])) {
+            if(password_verify($password, $user['password'])) {
                 $token = md5(time().rand(0, 9999).time());
                 Admin::update()->set('token', $token)->where('email', $email)->execute();
                 return $token;
@@ -46,23 +40,18 @@ class UserHandler {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $token =  md5(time().rand(0,9999).time());
 
-        $pdo = Database::getInstance();
-        $sql = $pdo->prepare("INSERT INTO `admin` (`name`, `email`, `password`, `token`) VALUES (:name, :email, :password, :token)");
-        $sql->bindValue(':name', $name);
-        $sql->bindValue(':email', $email);
-        $sql->bindValue(':password', $hash);
-        $sql->bindValue(':token', $token);
-        $sql->execute();
+        Admin::insert([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'token' => $token
+        ])->execute();
+        
         return $token;
     }
 
     public function emailExists($email) {
-        $pdo = Database::getInstance();
-        $sql = $pdo->prepare("SELECT * FROM `admin` WHERE email = :email");
-        $sql->bindValue(':email', $email);
-        $sql->execute();
-
-        $admin = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        $admin = Admin::select()->where('email', $email)->one();
 
         return $admin ? true : false;
     }

@@ -243,20 +243,20 @@
       <!-- End Navbar -->
       <div class="container-fluid py-4">
         <div class="row justify-content-sm-center mt-4">
-            <?php if($order->service_type === "airportTaxi"):?>
+            <?php if($order['service_type'] === "airporttaxi"):?>
                 <?=$render('form-airport', ['order' => $order])?>
             <?php endif;?>
 
-            <?php if($order->service_type === "taxi"):?>
+            <?php if($order['service_type'] === "taxi"):?>
                 <?=$render('form-taxi', ['order' => $order])?>
 
             <?php endif;?>
 
-            <?php if($order->service_type === "bus"):?>
+            <?php if($order['service_type'] === "bus"):?>
                 <?=$render('form-bus', ['order' => $order])?>
             <?php endif;?>
 
-            <?php if($order->service_type === "limousine"):?>
+            <?php if($order['service_type'] === "limousine"):?>
                 <?=$render('form-limousine', ['order' => $order])?>
             <?php endif;?>
         </div>

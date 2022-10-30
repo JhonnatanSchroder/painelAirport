@@ -1,24 +1,23 @@
 <?php
 namespace src\helpers;
 
-use \core\Database;
-use \src\Config;
 use \src\models\Airport;
 use \src\models\Orders;
+use \src\models\AirportOrders;
+use \src\models\Bus;
+use \src\models\Limousine;
+use \src\models\Taxiorders;
+
 
 
 class OrdersHandler {
 
     public function getOrdersBus() {
-        $pdo = Database::getInstance();
+        $data = Bus::select()->orderBy('id', 'desc')->get();
 
-        $sql = $pdo->query("SELECT * FROM `bus`  ORDER BY id DESC");
-    
-        $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
         $order = new Orders();
         $order->list = [];
-
-        if($sql->rowCount() != 0) {
+        if(isset($data)) {
             foreach($data as $pedido) {
                 $newOrder = new Orders(); 
                 $newOrder->date = $pedido['date'];
@@ -43,15 +42,11 @@ class OrdersHandler {
     }
 
     public static function getOrdersLimousine() {
-        $pdo = Database::getInstance();
+        $data = Limousine::select()->orderBy('id', 'desc')->get();
 
-        $sql = $pdo->query("SELECT * FROM `limousine` ORDER BY id DESC");
-
-        $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
         $order = new Orders();
         $order->list = [];
-
-        if($sql->rowCount() != 0) {
+        if(isset($data)) {
             foreach($data as $pedido) {
                 $newOrder = new Orders(); 
                 $newOrder->date = $pedido['date'];
@@ -78,15 +73,11 @@ class OrdersHandler {
     }
 
     public static function getOrdersTaxi() {
-        $pdo = Database::getInstance();
+        $data = Taxiorders::select()->orderBy('id', 'desc')->get();
 
-        $sql = $pdo->query("SELECT * FROM `taxi` ORDER BY id DESC");
-
-        $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
         $order = new Orders();
         $order->list = [];
-
-        if($sql->rowCount() != 0) {
+        if(isset($data)) {
             foreach($data as $pedido) {
                 $newOrder = new Orders(); 
                 $newOrder->street_start = $pedido['street_start'];
@@ -116,16 +107,11 @@ class OrdersHandler {
     }
 
     public static function getOrdersAirport() {
-        $pdo = Database::getInstance();
+        $data = AirportOrders::select()->orderBy('id', 'desc')->get();
 
-        $sql = $pdo->query("SELECT * FROM `taxiorder` ORDER BY id DESC");
-
-
-        $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
         $order = new Orders();
         $order->list = [];
-
-        if($sql->rowCount() != 0) {
+        if(isset($data)) {
             foreach($data as $pedido) {
                 $newOrder = new Orders(); 
                 $newOrder->cep_start = $pedido['cep_start'];
@@ -134,9 +120,9 @@ class OrdersHandler {
                 $newOrder->kids_seats = $pedido['kids_seats'];
                 $newOrder->booster_seats = $pedido['booster_seats'];
                 $newOrder->obs = $pedido['obs'];
-                $newOrder->name = $pedido['name_user'];
+                $newOrder->name = $pedido['name'];
                 $newOrder->email = $pedido['email'];
-                $newOrder->telefone = $pedido['telefone'];
+                $newOrder->telefone = $pedido['phone'];
                 $newOrder->street_name = $pedido['street_name'];
                 $newOrder->cep_end = $pedido['cep_end'];
                 $newOrder->conection = $pedido['conection'];
@@ -154,31 +140,27 @@ class OrdersHandler {
     }
 
     public static function delete($id, $service) {
-        $pdo = Database::getInstance();
 
-        $sql = [];
-        if($service === 'airportTaxi'){
-            $sql = $pdo->prepare("DELETE FROM `taxiorder` WHERE id = :id");   
-            $sql->bindValue(':id', $id);
-            $sql->execute();
+        if($service === 'airporttaxi'){
+            AirportOrders::delete()->where('id', $id)->execute();
+
+            return;
         }
 
         if($service === 'taxi'){
-            $sql = $pdo->prepare("DELETE FROM `taxi` WHERE id = :id");   
-            $sql->bindValue(':id', $id);
-            $sql->execute();
+            Taxiorders::delete()->where('id', $id)->execute();
+            return;
         }
 
         if($service === 'bus'){
-            $sql = $pdo->prepare("DELETE FROM `bus` WHERE id = :id");   
-            $sql->bindValue(':id', $id);
-            $sql->execute();
+           Bus::delete()->where('id', $id)->execute();
+           return;
         }
 
         if($service === 'limousine'){
-            $sql = $pdo->prepare("DELETE FROM `limousine` WHERE id = :id");   
-            $sql->bindValue(':id', $id);
-            $sql->execute();
+            Limousine::delete()->where('id', $id)->execute();
+            return;
+            
         }
         
     }
